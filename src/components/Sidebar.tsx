@@ -10,6 +10,7 @@ import {
   Github
 } from 'lucide-react';
 import { ToolType } from '../types';
+import BoltBadge from './BoltBadge';
 
 interface SidebarProps {
   activeTool: ToolType;
@@ -37,10 +38,15 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Header */}
       <div className="p-4 border-b border-gray-200 dark:border-gray-700">
         <div className="hidden lg:block">
-          <h1 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
-            TextForge
-          </h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+          <div className="flex items-center space-x-3 mb-2">
+            <h1 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              TextForge
+            </h1>
+            <div className="w-6 h-6 flex-shrink-0">
+              <BoltBadge isDark={isDark} />
+            </div>
+          </div>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
             Text & Data Toolkit
           </p>
         </div>

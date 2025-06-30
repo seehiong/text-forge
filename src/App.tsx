@@ -10,6 +10,7 @@ import CaseConverter from './components/CaseConverter';
 import CodeFormatter from './components/CodeFormatter';
 import EncodingTools from './components/EncodingTools';
 import Generators from './components/Generators';
+import BoltBadge from './components/BoltBadge';
 
 function App() {
   const [activeTool, setActiveTool] = useState<ToolType>('cleanup');
@@ -47,9 +48,14 @@ function App() {
       {/* Header for mobile */}
       <div className="lg:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 p-4 flex-shrink-0">
         <div className="flex items-center justify-between">
-          <h1 className="text-lg font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
-            TextForge
-          </h1>
+          <div className="flex items-center space-x-2">
+            <h1 className="text-lg font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              TextForge
+            </h1>
+            <div className="w-5 h-5 flex-shrink-0">
+              <BoltBadge isDark={isDark} />
+            </div>
+          </div>
           <button
             onClick={() => setShowTools(!showTools)}
             className="px-3 py-1 bg-purple-600 text-white rounded-lg text-sm font-medium"
