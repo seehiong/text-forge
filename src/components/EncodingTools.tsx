@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Lock, Unlock, Hash, Link } from 'lucide-react';
 import { 
   encodeBase64, 
   decodeBase64, 
@@ -57,31 +56,26 @@ const EncodingTools: React.FC<EncodingToolsProps> = ({ input, onOutput }) => {
     {
       action: 'base64Encode',
       label: 'Encode Base64',
-      icon: Lock,
       description: 'Convert text to Base64 encoding'
     },
     {
       action: 'base64Decode',
       label: 'Decode Base64',
-      icon: Unlock,
       description: 'Convert Base64 back to text'
     },
     {
       action: 'urlEncode',
       label: 'URL Encode',
-      icon: Link,
       description: 'Encode text for safe URL usage'
     },
     {
       action: 'urlDecode',
       label: 'URL Decode',
-      icon: Link,
       description: 'Decode URL-encoded text'
     },
     {
       action: 'sha256',
       label: 'SHA-256 Hash',
-      icon: Hash,
       description: 'Generate SHA-256 hash (one-way)'
     }
   ];
@@ -105,30 +99,25 @@ const EncodingTools: React.FC<EncodingToolsProps> = ({ input, onOutput }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {tools.map((tool) => {
-          const Icon = tool.icon;
           return (
             <div
               key={tool.action}
-              className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+              className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
             >
-              <div className="flex items-start space-x-3">
-                <Icon className="w-5 h-5 text-purple-600 dark:text-purple-400 mt-0.5" />
-                <div className="flex-1">
-                  <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-1">
-                    {tool.label}
-                  </h3>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">
-                    {tool.description}
-                  </p>
-                  <ToolButton
-                    onClick={() => handleEncoding(tool.action)}
-                    disabled={!input.trim() || loading}
-                    variant="primary"
-                    className="w-full"
-                  >
-                    {loading && tool.action === 'sha256' ? 'Hashing...' : 'Apply'}
-                  </ToolButton>
-                </div>
+              <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
+                {tool.label}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                {tool.description}
+              </p>
+              <ToolButton
+                onClick={() => handleEncoding(tool.action)}
+                disabled={!input.trim() || loading}
+                variant="primary"
+                className="w-full"
+              >
+                {loading && tool.action === 'sha256' ? 'Hashing...' : 'Apply'}
+              </ToolButton>
               </div>
             </div>
           );

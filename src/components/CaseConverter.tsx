@@ -1,5 +1,4 @@
 import React from 'react';
-import { Type, ArrowRight } from 'lucide-react';
 import { convertCase } from '../utils/textUtils';
 import ToolButton from './ToolButton';
 
@@ -43,12 +42,9 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ input, onOutput }) => {
             key={caseItem.type}
             className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
           >
-            <div className="flex items-center space-x-2 mb-3">
-              <Type className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-              <span className="font-medium text-gray-900 dark:text-gray-100 text-sm">
-                {caseItem.label}
-              </span>
-            </div>
+            <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-3">
+              {caseItem.label}
+            </h3>
             
             <div className="mb-3 p-2 bg-white dark:bg-gray-900 rounded border">
               <code className="text-xs text-gray-600 dark:text-gray-400">
@@ -60,10 +56,9 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ input, onOutput }) => {
               onClick={() => handleConversion(caseItem.type)}
               disabled={!input.trim()}
               variant="primary"
-              className="w-full flex items-center justify-center space-x-2"
+              className="w-full"
             >
-              <span>Convert</span>
-              <ArrowRight className="w-3 h-3" />
+              Convert
             </ToolButton>
           </div>
         ))}

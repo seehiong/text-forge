@@ -1,5 +1,4 @@
 import React from 'react';
-import { Trash2, Scissors, AlignLeft, Minus } from 'lucide-react';
 import { cleanupText } from '../utils/textUtils';
 import ToolButton from './ToolButton';
 
@@ -18,25 +17,21 @@ const TextCleanup: React.FC<TextCleanupProps> = ({ input, onOutput }) => {
     {
       action: 'removeExtraSpaces',
       label: 'Remove Extra Spaces',
-      icon: Minus,
       description: 'Collapse multiple spaces into single spaces'
     },
     {
       action: 'removeLineBreaks',
       label: 'Remove Line Breaks',
-      icon: AlignLeft,
       description: 'Convert text to single line'
     },
     {
       action: 'removeAllSpaces',
       label: 'Remove All Spaces',
-      icon: Scissors,
       description: 'Remove all whitespace characters'
     },
     {
       action: 'trimLines',
       label: 'Trim Each Line',
-      icon: Trash2,
       description: 'Remove leading/trailing spaces from each line'
     }
   ];
@@ -54,30 +49,25 @@ const TextCleanup: React.FC<TextCleanupProps> = ({ input, onOutput }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {tools.map((tool) => {
-          const Icon = tool.icon;
           return (
             <div
               key={tool.action}
-              className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+              className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
             >
-              <div className="flex items-start space-x-3">
-                <Icon className="w-5 h-5 text-purple-600 dark:text-purple-400 mt-0.5" />
-                <div className="flex-1">
-                  <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-1">
-                    {tool.label}
-                  </h3>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">
-                    {tool.description}
-                  </p>
-                  <ToolButton
-                    onClick={() => handleCleanup(tool.action)}
-                    disabled={!input.trim()}
-                    variant="primary"
-                    className="w-full"
-                  >
-                    Apply
-                  </ToolButton>
-                </div>
+              <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
+                {tool.label}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                {tool.description}
+              </p>
+              <ToolButton
+                onClick={() => handleCleanup(tool.action)}
+                disabled={!input.trim()}
+                variant="primary"
+                className="w-full"
+              >
+                Apply
+              </ToolButton>
               </div>
             </div>
           );

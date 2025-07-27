@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Code, Minimize, Maximize, Database } from 'lucide-react';
 import { formatJSON, convertKvToJson, minifyCSS } from '../utils/formatters';
 import ToolButton from './ToolButton';
 
@@ -43,25 +42,21 @@ const CodeFormatter: React.FC<CodeFormatterProps> = ({ input, onOutput }) => {
     {
       action: 'jsonBeautify',
       label: 'Beautify JSON',
-      icon: Maximize,
       description: 'Format JSON with proper indentation'
     },
     {
       action: 'jsonMinify',
       label: 'Minify JSON',
-      icon: Minimize,
       description: 'Remove whitespace from JSON'
     },
     {
       action: 'kvToJson',
       label: 'Key-Value to JSON',
-      icon: Database,
       description: 'Convert key=value pairs to JSON object'
     },
     {
       action: 'cssMinify',
       label: 'Minify CSS',
-      icon: Code,
       description: 'Remove comments and whitespace from CSS'
     }
   ];
@@ -85,30 +80,25 @@ const CodeFormatter: React.FC<CodeFormatterProps> = ({ input, onOutput }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {tools.map((tool) => {
-          const Icon = tool.icon;
           return (
             <div
               key={tool.action}
-              className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+              className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
             >
-              <div className="flex items-start space-x-3">
-                <Icon className="w-5 h-5 text-purple-600 dark:text-purple-400 mt-0.5" />
-                <div className="flex-1">
-                  <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-1">
-                    {tool.label}
-                  </h3>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">
-                    {tool.description}
-                  </p>
-                  <ToolButton
-                    onClick={() => handleFormat(tool.action)}
-                    disabled={!input.trim()}
-                    variant="primary"
-                    className="w-full"
-                  >
-                    Apply
-                  </ToolButton>
-                </div>
+              <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
+                {tool.label}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                {tool.description}
+              </p>
+              <ToolButton
+                onClick={() => handleFormat(tool.action)}
+                disabled={!input.trim()}
+                variant="primary"
+                className="w-full"
+              >
+                Apply
+              </ToolButton>
               </div>
             </div>
           );
