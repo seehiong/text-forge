@@ -99,8 +99,8 @@ A comprehensive, production-ready web application for text processing, data mani
 ### Installation
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd textforge
+git clone [<repository-url>](https://github.com/seehiong/text-forge.git)
+cd text-forge
 
 # Install dependencies
 npm install
