@@ -19,7 +19,7 @@ const ToolButton: React.FC<ToolButtonProps> = ({
   
   const variantClasses = {
     primary: 'bg-purple-600 hover:bg-purple-700 text-white shadow-lg hover:shadow-xl',
-    secondary: 'bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300',
+    secondary: 'bg-purple-100 dark:bg-purple-900/30 hover:bg-purple-200 dark:hover:bg-purple-800/40 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-700',
     danger: 'bg-red-100 dark:bg-red-900/20 hover:bg-red-200 dark:hover:bg-red-900/30 text-red-700 dark:text-red-400'
   };
 
