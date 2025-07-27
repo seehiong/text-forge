@@ -60,87 +60,90 @@ const Generators: React.FC<GeneratorsProps> = ({ onOutput }) => {
         </div>
       )}
 
-      {/* UUID Generator */}
-      <div className="bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
-        <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-4">UUID Generator</h3>
-        
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-          Generate universally unique identifiers for your applications
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-3">
-          <ToolButton
-            onClick={() => handleUUIDGeneration(4)}
-            variant="primary"
-            className="flex-1"
-          >
-            Generate UUID v4 (Random)
-          </ToolButton>
-          <ToolButton
-            onClick={() => handleUUIDGeneration(1)}
-            variant="secondary"
-            className="flex-1"
-          >
-            Generate UUID v1 (Timestamp)
-          </ToolButton>
-        </div>
-      </div>
-
-      {/* Password Generator */}
-      <div className="bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
-        <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-4">Password Generator</h3>
-        
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-          Generate secure, random passwords with customizable options
-        </p>
-        
-        {/* Length Slider */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Length: {passwordLength}
-          </label>
-          <input
-            type="range"
-            min="8"
-            max="64"
-            value={passwordLength}
-            onChange={(e) => setPasswordLength(Number(e.target.value))}
-            className="w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
-          />
-          <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
-            <span>8</span>
-            <span>64</span>
+      {/* Generators Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* UUID Generator */}
+        <div className="bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+          <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-4">UUID Generator</h3>
+          
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Generate universally unique identifiers for your applications
+          </p>
+          
+          <div className="flex flex-col gap-3">
+            <ToolButton
+              onClick={() => handleUUIDGeneration(4)}
+              variant="primary"
+              className="w-full"
+            >
+              Generate UUID v4 (Random)
+            </ToolButton>
+            <ToolButton
+              onClick={() => handleUUIDGeneration(1)}
+              variant="secondary"
+              className="w-full"
+            >
+              Generate UUID v1 (Timestamp)
+            </ToolButton>
           </div>
         </div>
-        
-        {/* Options */}
-        <div className="grid grid-cols-2 gap-3 mb-4">
-          {Object.entries(passwordOptions).map(([key, value]) => (
-            <label key={key} className="flex items-center space-x-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={value}
-                onChange={() => handleOptionChange(key as keyof typeof passwordOptions)}
-                className="w-4 h-4 text-purple-600 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded focus:ring-purple-500"
-              />
-              <span className="text-sm text-gray-700 dark:text-gray-300 capitalize">
-                {key === 'lowercase' ? 'a-z' : 
-                 key === 'uppercase' ? 'A-Z' : 
-                 key === 'numbers' ? '0-9' : 
-                 '!@#$%'}
-              </span>
+
+        {/* Password Generator */}
+        <div className="bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+          <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-4">Password Generator</h3>
+          
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Generate secure, random passwords with customizable options
+          </p>
+          
+          {/* Length Slider */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Length: {passwordLength}
             </label>
-          ))}
+            <input
+              type="range"
+              min="8"
+              max="64"
+              value={passwordLength}
+              onChange={(e) => setPasswordLength(Number(e.target.value))}
+              className="w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
+            />
+            <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <span>8</span>
+              <span>64</span>
+            </div>
+          </div>
+          
+          {/* Options */}
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            {Object.entries(passwordOptions).map(([key, value]) => (
+              <label key={key} className="flex items-center space-x-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={value}
+                  onChange={() => handleOptionChange(key as keyof typeof passwordOptions)}
+                  className="w-4 h-4 text-purple-600 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded focus:ring-purple-500"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300 capitalize">
+                  {key === 'lowercase' ? 'a-z' : 
+                   key === 'uppercase' ? 'A-Z' : 
+                   key === 'numbers' ? '0-9' : 
+                   '!@#$%'}
+                </span>
+              </label>
+            ))}
+          </div>
+          
+          <ToolButton
+            onClick={handlePasswordGeneration}
+            variant="primary"
+            className="w-full"
+            disabled={!Object.values(passwordOptions).some(Boolean)}
+          >
+            Generate Password
+          </ToolButton>
         </div>
-        
-        <ToolButton
-          onClick={handlePasswordGeneration}
-          variant="primary"
-          className="w-full"
-          disabled={!Object.values(passwordOptions).some(Boolean)}
-        >
-          Generate Password
-        </ToolButton>
       </div>
 
       <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
