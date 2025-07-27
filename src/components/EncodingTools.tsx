@@ -118,7 +118,6 @@ const EncodingTools: React.FC<EncodingToolsProps> = ({ input, onOutput }) => {
               >
                 {loading && tool.action === 'sha256' ? 'Hashing...' : 'Apply'}
               </ToolButton>
-              </div>
             </div>
           );
         })}

@@ -68,7 +68,6 @@ const TextCleanup: React.FC<TextCleanupProps> = ({ input, onOutput }) => {
               >
                 Apply
               </ToolButton>
-              </div>
             </div>
           );
         })}

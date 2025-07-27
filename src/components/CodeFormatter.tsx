@@ -99,7 +99,6 @@ const CodeFormatter: React.FC<CodeFormatterProps> = ({ input, onOutput }) => {
               >
                 Apply
               </ToolButton>
-              </div>
             </div>
           );
         })}
