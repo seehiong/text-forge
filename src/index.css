@@ -61,18 +61,23 @@ input[type="range"] {
   cursor: pointer;
 }
 
-input[type="range"]::-webkit-slider-track {
-  background: linear-gradient(90deg, #8b5cf6, #a855f7);
-  height: 8px;
-  border-radius: 8px;
-  border: 1px solid #7c3aed;
-  box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);
+/* Custom slider class for better contrast */
+.slider {
+  background: linear-gradient(90deg, #8b5cf6, #a855f7) !important;
+  border: 1px solid #7c3aed !important;
+  box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3) !important;
 }
 
-.dark input[type="range"]::-webkit-slider-track {
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
-  border-color: #8b5cf6;
-  box-shadow: 0 2px 4px rgba(139, 92, 246, 0.5);
+.dark .slider {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6) !important;
+  border: 1px solid #8b5cf6 !important;
+  box-shadow: 0 2px 4px rgba(139, 92, 246, 0.5) !important;
+}
+
+input[type="range"]::-webkit-slider-track {
+  background: transparent;
+  height: 8px;
+  border-radius: 8px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -104,17 +109,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 input[type="range"]::-moz-range-track {
-  background: linear-gradient(90deg, #8b5cf6, #a855f7);
+  background: transparent;
   height: 8px;
   border-radius: 8px;
-  border: 1px solid #7c3aed;
-  box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);
-}
-
-.dark input[type="range"]::-moz-range-track {
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
-  border-color: #8b5cf6;
-  box-shadow: 0 2px 4px rgba(139, 92, 246, 0.5);
 }
 
 input[type="range"]::-moz-range-thumb {
