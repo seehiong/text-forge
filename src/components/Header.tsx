@@ -1,6 +1,5 @@
 import React from 'react';
 import { Moon, Sun, Github } from 'lucide-react';
-import BoltBadge from './BoltBadge';
 
 interface HeaderProps {
   isDark: boolean;
@@ -16,9 +15,6 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
           <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
             TextForge
           </h1>
-          <div className="w-6 h-6 flex-shrink-0">
-            <BoltBadge isDark={isDark} />
-          </div>
           <div className="hidden sm:block">
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Ultimate Text & Data Manipulation Toolkit
@@ -37,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ isDark, onThemeToggle }) => {
           </button>
           
           <a
-            href="https://github.com"
+            href="https://github.com/seehiong/text-forge"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
