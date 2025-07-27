@@ -62,20 +62,20 @@ input[type="range"] {
 }
 
 input[type="range"]::-webkit-slider-track {
-  @apply bg-gray-200 dark:bg-gray-600 h-2 rounded-lg;
+  @apply bg-gray-300 dark:bg-gray-600 h-2 rounded-lg;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  @apply bg-purple-600 h-4 w-4 rounded-full cursor-pointer;
+  @apply bg-purple-600 h-4 w-4 rounded-full cursor-pointer shadow-md;
 }
 
 input[type="range"]::-moz-range-track {
-  @apply bg-gray-200 dark:bg-gray-600 h-2 rounded-lg border-0;
+  @apply bg-gray-300 dark:bg-gray-600 h-2 rounded-lg border-0;
 }
 
 input[type="range"]::-moz-range-thumb {
-  @apply bg-purple-600 h-4 w-4 rounded-full border-0 cursor-pointer;
+  @apply bg-purple-600 h-4 w-4 rounded-full border-0 cursor-pointer shadow-md;
 }
 
 /* Animation utilities */
