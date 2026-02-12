@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ToolType } from './types';
 import { useTheme } from './hooks/useTheme';
 import { getTextStats } from './utils/textUtils';
@@ -11,6 +11,7 @@ import CaseConverter from './components/CaseConverter';
 import CodeFormatter from './components/CodeFormatter';
 import EncodingTools from './components/EncodingTools';
 import Generators from './components/Generators';
+import DiffChecker from './components/DiffChecker';
 
 function App() {
   const [activeTool, setActiveTool] = useState<ToolType>('cleanup');
@@ -25,7 +26,7 @@ function App() {
 
   const renderToolComponent = () => {
     const props = { input, onOutput: setOutput };
-    
+
     switch (activeTool) {
       case 'cleanup':
         return <TextCleanup {...props} />;
@@ -52,7 +53,12 @@ function App() {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden min-h-0">
-        {activeTool === 'generators' ? (
+        {activeTool === 'diff' ? (
+          <DiffChecker
+            leftValue={input}
+            onLeftChange={setInput}
+          />
+        ) : activeTool === 'generators' ? (
           /* Generators Layout: Tools on top, output below */
           <div className="flex-1 flex flex-col overflow-hidden">
             {/* Tools Panel */}
@@ -67,7 +73,7 @@ function App() {
               <div className="p-6 flex-1 flex flex-col min-h-0">
                 <TextArea
                   value={output}
-                  onChange={() => {}} // Read-only
+                  onChange={() => { }} // Read-only
                   placeholder="Generated output will appear here..."
                   label="Generated Output"
                   readOnly
@@ -108,7 +114,7 @@ function App() {
                 <div className="p-6 flex-1 flex flex-col min-h-0">
                   <TextArea
                     value={output}
-                    onChange={() => {}} // Read-only
+                    onChange={() => { }} // Read-only
                     placeholder="Processed output will appear here..."
                     label="Output"
                     readOnly

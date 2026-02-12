@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "diff": "^8.0.3",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
+    "@types/diff": "^8.0.0",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@types/uuid": "^9.0.8",
