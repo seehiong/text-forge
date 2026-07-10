@@ -1,6 +1,9 @@
+//src/components/CaseConverter.tsx
+
 import React from 'react';
 import { convertCase } from '../utils/textUtils';
 import ToolButton from './ToolButton';
+import { CaseSensitive } from 'lucide-react';
 
 interface CaseConverterProps {
   input: string;
@@ -26,13 +29,13 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ input, onOutput }) => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <div>
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-          Case Converter
+        <h2 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight flex items-center gap-2">
+          <span>Case Converter</span>
         </h2>
-        <p className="text-gray-600 dark:text-gray-400 text-sm">
-          Convert text between different case formats
+        <p className="text-slate-500 dark:text-slate-400 text-xs">
+          Convert text between different case formats instantly
         </p>
       </div>
 
@@ -40,25 +43,33 @@ const CaseConverter: React.FC<CaseConverterProps> = ({ input, onOutput }) => {
         {cases.map((caseItem) => (
           <div
             key={caseItem.type}
-            className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+            className="glass-card p-5 rounded-2xl flex flex-col justify-between"
           >
-            <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-3">
-              {caseItem.label}
-            </h3>
-            
-            <div className="mb-3 p-2 bg-white dark:bg-gray-900 rounded border">
-              <code className="text-xs text-gray-600 dark:text-gray-400">
-                {caseItem.preview}
-              </code>
+            <div>
+              <div className="flex items-center space-x-2 mb-3">
+                <div className="p-1 bg-purple-50 dark:bg-purple-950/20 rounded-lg">
+                  <CaseSensitive className="w-4 h-4 text-purple-500" />
+                </div>
+                <h3 className="font-bold text-slate-800 dark:text-slate-200 text-sm">
+                  {caseItem.label}
+                </h3>
+              </div>
+
+              <div className="mb-4 px-3 py-2 bg-slate-900/5 dark:bg-black/20 rounded-xl border border-slate-200/50 dark:border-white/5 font-mono text-xs flex items-center justify-between">
+                <code className="text-slate-600 dark:text-slate-400 text-[11px] font-bold">
+                  {caseItem.preview}
+                </code>
+                <span className="text-[8px] text-slate-400 dark:text-slate-600 font-bold uppercase select-none tracking-wider">Preview</span>
+              </div>
             </div>
 
             <ToolButton
               onClick={() => handleConversion(caseItem.type)}
               disabled={!input.trim()}
               variant="primary"
-              className="w-full"
+              className="w-full text-xs"
             >
-              Convert
+              Convert Case
             </ToolButton>
           </div>
         ))}

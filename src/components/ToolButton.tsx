@@ -1,3 +1,5 @@
+//src/components/ToolButton.tsx
+
 import React from 'react';
 
 interface ToolButtonProps {
@@ -8,19 +10,19 @@ interface ToolButtonProps {
   className?: string;
 }
 
-const ToolButton: React.FC<ToolButtonProps> = ({ 
-  onClick, 
-  children, 
+const ToolButton: React.FC<ToolButtonProps> = ({
+  onClick,
+  children,
   variant = 'secondary',
   disabled = false,
   className = ''
 }) => {
-  const baseClasses = 'px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed';
-  
+  const baseClasses = 'px-4 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 transform select-none disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none active:scale-98';
+
   const variantClasses = {
-    primary: 'bg-purple-600 hover:bg-purple-700 text-white shadow-lg hover:shadow-xl',
-    secondary: 'bg-purple-100 dark:bg-purple-900/30 hover:bg-purple-200 dark:hover:bg-purple-800/40 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-700',
-    danger: 'bg-red-100 dark:bg-red-900/20 hover:bg-red-200 dark:hover:bg-red-900/30 text-red-700 dark:text-red-400'
+    primary: 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-md hover:shadow-lg hover:shadow-purple-500/10 border border-purple-600/30 dark:border-purple-400/20',
+    secondary: 'bg-white dark:bg-[#120e25]/60 hover:bg-slate-50 dark:hover:bg-[#16122d]/80 text-purple-600 dark:text-purple-400 border border-slate-200/80 dark:border-white/5 shadow-sm',
+    danger: 'bg-red-500/10 dark:bg-red-500/5 hover:bg-red-500/20 border border-red-500/20 text-red-600 dark:text-red-400'
   };
 
   return (

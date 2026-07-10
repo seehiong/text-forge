@@ -1,3 +1,5 @@
+//src/utils/textUtils.ts
+
 import { TextStats } from '../types';
 
 export const getTextStats = (text: string): TextStats => {
@@ -43,11 +45,11 @@ export const convertCase = (text: string, caseType: string): string => {
     case 'sentence':
       return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
     case 'title':
-      return text.replace(/\w\S*/g, (txt) => 
+      return text.replace(/\w\S*/g, (txt) =>
         txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
       );
     case 'camelCase':
-      return text.toLowerCase().replace(/([-_ ][a-z])/g, g => 
+      return text.toLowerCase().replace(/([-_ ][a-z])/g, g =>
         g.toUpperCase().replace(/[-_ ]/g, '')
       );
     case 'pascalCase':

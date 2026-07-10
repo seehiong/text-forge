@@ -1,3 +1,5 @@
+//src/hooks/useTheme.ts
+
 import { useState, useEffect } from 'react';
 
 export const useTheme = () => {
@@ -14,7 +16,7 @@ export const useTheme = () => {
   useEffect(() => {
     // Save preference to localStorage
     localStorage.setItem('textforge-theme', JSON.stringify(isDark));
-    
+
     // Apply theme to document
     const root = document.documentElement;
     if (isDark) {

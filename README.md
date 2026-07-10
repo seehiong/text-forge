@@ -2,6 +2,13 @@
 
 A comprehensive, production-ready web application for text processing, data manipulation, and utility generation. Built with React, TypeScript, and Tailwind CSS featuring a modern, responsive interface.
 
+## 🌐 Live Demo
+
+**[https://seehiong.github.io/text-forge/](https://seehiong.github.io/text-forge/)**
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-blue?style=for-the-badge&logo=github)](https://seehiong.github.io/text-forge/)
+[![Deploy to GitHub Pages](https://github.com/seehiong/text-forge/actions/workflows/deploy.yml/badge.svg)](https://github.com/seehiong/text-forge/actions/workflows/deploy.yml)
+
 ## 🚀 Features
 
 ### 📝 Text Cleanup & Analysis
@@ -99,7 +106,7 @@ A comprehensive, production-ready web application for text processing, data mani
 ### Installation
 ```bash
 # Clone the repository
-git clone [<repository-url>](https://github.com/seehiong/text-forge.git)
+git clone https://github.com/seehiong/text-forge.git
 cd text-forge
 
 # Install dependencies
@@ -115,36 +122,63 @@ npm run build
 npm run preview
 ```
 
-### Development
+### Development & Verification
+
+To run the app locally, perform format linting, run compilation typechecks, or execute unit tests:
+
 ```bash
 # Run development server with hot reload
 npm run dev
 
-# Run linting
+# Run linting checks
 npm run lint
 
-# Type checking
-npx tsc --noEmit
+# Run type checks
+npm run typecheck
+
+# Run unit tests
+npm run test
 ```
 
 ## 🌐 Deployment
 
-### Build Process
+The project is configured for automated deployment to GitHub Pages via GitHub Actions.
+
+### Automated Deployment (GitHub Pages)
+
+Whenever code is pushed to the `main` branch, a GitHub Action automatically builds the project and deploys it to GitHub Pages.
+
+To enable this:
+1. Go to your repository settings on GitHub.
+2. In the left sidebar, click **Pages**.
+3. Under **Build and deployment**, select **GitHub Actions** as the **Source**.
+4. Future pushes to the `main` branch will automatically build and deploy the application.
+
+### Manual Build
+
+If you need to build the project locally:
 ```bash
 npm run build
 ```
 This creates an optimized production build in the `dist/` directory.
 
-### Deployment Options
-- **Netlify**: Drag and drop the `dist` folder
-- **Vercel**: Connect your repository for automatic deployments
-- **GitHub Pages**: Use the built assets for static hosting
-- **Any Static Host**: Upload the `dist` folder contents
-
 ### Environment Configuration
-No environment variables required for basic functionality. All tools work client-side with Web APIs.
+
+No environment variables are required for basic functionality. All tools work client-side with Web APIs.
 
 ## 🧪 Testing
+
+### Automated Unit Tests
+
+The project uses **Vitest** for automated unit testing. Verify changes before deploying by executing:
+
+```bash
+# Run the test suite once
+npm run test
+
+# Run the test suite in interactive watch mode
+npx vitest
+```
 
 ### Manual Testing Checklist
 - [ ] Text cleanup tools process input correctly

@@ -1,4 +1,6 @@
-export type ToolType = 'cleanup' | 'case' | 'format' | 'encoding' | 'generators' | 'diff';
+//src/types/index.ts
+
+export type ToolType = 'cleanup' | 'case' | 'format' | 'encoding' | 'generators' | 'diff' | 'time' | 'regex';
 
 export interface Tool {
   id: string;

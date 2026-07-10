@@ -24,34 +24,51 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
-  @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  @apply bg-slate-50 dark:bg-[#07050e] text-slate-800 dark:text-slate-100;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 code {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
+  @apply bg-slate-100 dark:bg-[#0c0919];
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+  @apply bg-purple-500/20 dark:bg-purple-400/10 rounded-full border-2 border-transparent bg-clip-padding hover:bg-purple-500/40 dark:hover:bg-purple-400/35;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400 dark:bg-gray-500;
+/* Glassmorphism Styles */
+.glass-panel {
+  @apply bg-white/70 dark:bg-[#0d0a1c]/65 backdrop-blur-xl border border-slate-200/50 dark:border-white/5;
+}
+
+.glass-card {
+  @apply bg-white/60 dark:bg-[#110d24]/50 backdrop-blur-lg border border-slate-200/40 dark:border-white/5 shadow-md shadow-purple-950/5 transition-all duration-300;
+}
+
+.glass-card:hover {
+  @apply bg-white/80 dark:bg-[#14102c]/75 border-purple-500/30 dark:border-purple-500/25 shadow-xl shadow-purple-500/5 -translate-y-0.5;
+}
+
+.glow-primary {
+  box-shadow: 0 0 25px -5px rgba(109, 40, 217, 0.35);
+}
+
+.dark .glow-primary {
+  box-shadow: 0 0 30px -5px rgba(168, 85, 247, 0.25);
 }
 
 /* Range input styling */
@@ -61,91 +78,57 @@ input[type="range"] {
   cursor: pointer;
 }
 
-/* Custom slider class for better contrast */
 .slider {
-  background: linear-gradient(90deg, #8b5cf6, #a855f7) !important;
+  background: linear-gradient(90deg, #7c3aed, #a855f7) !important;
   border: 1px solid #7c3aed !important;
-  box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3) !important;
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.2) !important;
 }
 
 .dark .slider {
-  background: linear-gradient(90deg, #6366f1, #8b5cf6) !important;
-  border: 1px solid #8b5cf6 !important;
-  box-shadow: 0 2px 4px rgba(139, 92, 246, 0.5) !important;
+  background: linear-gradient(90deg, #8b5cf6, #d8b4fe) !important;
+  border: 1px solid #a855f7 !important;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.35) !important;
 }
 
 input[type="range"]::-webkit-slider-track {
   background: transparent;
-  height: 8px;
+  height: 6px;
   border-radius: 8px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  background: linear-gradient(135deg, #ffffff, #f3f4f6);
-  height: 22px;
-  width: 22px;
+  background: #ffffff;
+  height: 20px;
+  width: 20px;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 0 2px #8b5cf6;
-  border: 2px solid #ffffff;
+  box-shadow: 0 4px 10px rgba(124, 58, 237, 0.25);
+  border: 2px solid #7c3aed;
   transition: all 0.2s ease;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), 0 0 0 3px #8b5cf6;
+  transform: scale(1.15);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.45);
 }
 
 .dark input[type="range"]::-webkit-slider-thumb {
-  background: linear-gradient(135deg, #1f2937, #374151);
-  border-color: #8b5cf6;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 2px #8b5cf6;
+  background: #0d0a1c;
+  border-color: #a855f7;
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.35);
 }
 
 .dark input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 0 3px #8b5cf6;
+  transform: scale(1.15);
+  box-shadow: 0 4px 18px rgba(168, 85, 247, 0.55);
 }
 
-input[type="range"]::-moz-range-track {
-  background: transparent;
-  height: 8px;
-  border-radius: 8px;
-}
-
-input[type="range"]::-moz-range-thumb {
-  background: linear-gradient(135deg, #ffffff, #f3f4f6);
-  height: 22px;
-  width: 22px;
-  border-radius: 50%;
-  border: 2px solid #8b5cf6;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s ease;
-}
-
-input[type="range"]::-moz-range-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-.dark input[type="range"]::-moz-range-thumb {
-  background: linear-gradient(135deg, #1f2937, #374151);
-  border-color: #8b5cf6;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.dark input[type="range"]::-moz-range-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-}
-
-/* Animation utilities */
-@keyframes slideIn {
+/* Animations */
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -153,18 +136,18 @@ input[type="range"]::-moz-range-thumb:hover {
   }
 }
 
-.animate-slide-in {
-  animation: slideIn 0.3s ease-out;
+.animate-fade-in {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Focus styles */
-.focus-visible {
-  @apply outline-none ring-2 ring-purple-500 ring-offset-2 ring-offset-white dark:ring-offset-gray-900;
+.focus-ring {
+  @apply outline-none ring-2 ring-purple-500/40 dark:ring-purple-400/40 border-purple-500/50 dark:border-purple-400/50 transition-all duration-200;
 }
 
-/* Ensure proper theme transitions */
+/* Ensure theme transitions are smooth */
 * {
-  transition-property: background-color, border-color, color, fill, stroke;
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
 }

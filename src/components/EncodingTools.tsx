@@ -1,12 +1,27 @@
+//src/components/EncodingTools.tsx
+
 import React, { useState } from 'react';
-import { 
-  encodeBase64, 
-  decodeBase64, 
-  encodeURL, 
-  decodeURL, 
-  generateSHA256 
-} from '../utils/formatters';
+import {
+  encodeBase64,
+  decodeBase64,
+  encodeURL,
+  decodeURL,
+  generateSHA256,
+  decodeJWT,
+  parseURL
+} from '../utils/encoding';
 import ToolButton from './ToolButton';
+import {
+  Binary,
+  FileText,
+  Globe,
+  Link2,
+  Fingerprint,
+  AlertTriangle,
+  AlertCircle,
+  KeyRound,
+  Compass
+} from 'lucide-react';
 
 interface EncodingToolsProps {
   input: string;
@@ -20,10 +35,10 @@ const EncodingTools: React.FC<EncodingToolsProps> = ({ input, onOutput }) => {
   const handleEncoding = async (action: string) => {
     setError('');
     setLoading(true);
-    
+
     try {
       let result = '';
-      
+
       switch (action) {
         case 'base64Encode':
           result = encodeBase64(input);
@@ -40,10 +55,22 @@ const EncodingTools: React.FC<EncodingToolsProps> = ({ input, onOutput }) => {
         case 'sha256':
           result = await generateSHA256(input);
           break;
+        case 'jwtDecode':
+          const decoded = decodeJWT(input);
+          result = `// HEADER\n${JSON.stringify(decoded.header, null, 2)}\n\n// PAYLOAD\n${JSON.stringify(decoded.payload, null, 2)}`;
+          break;
+        case 'urlParse':
+          const parsed = parseURL(input);
+          result = `Protocol:   ${parsed.protocol}\nHost:       ${parsed.host}\nPath:       ${parsed.pathname}\n\nQuery Parameters:\n` +
+            (parsed.queryParams.length === 0
+              ? '(None)'
+              : parsed.queryParams.map(p => `  ${p.key} = ${p.value}`).join('\n')
+            );
+          break;
         default:
           result = input;
       }
-      
+
       onOutput(result);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -56,44 +83,62 @@ const EncodingTools: React.FC<EncodingToolsProps> = ({ input, onOutput }) => {
     {
       action: 'base64Encode',
       label: 'Encode Base64',
-      description: 'Convert text to Base64 encoding'
+      description: 'Convert plain text data to Base64 format encoding',
+      icon: <Binary className="w-4 h-4 text-purple-500" />
     },
     {
       action: 'base64Decode',
       label: 'Decode Base64',
-      description: 'Convert Base64 back to text'
+      description: 'Convert Base64 formatted string back to text',
+      icon: <FileText className="w-4 h-4 text-indigo-500" />
     },
     {
       action: 'urlEncode',
       label: 'URL Encode',
-      description: 'Encode text for safe URL usage'
+      description: 'Encode text strings for safe transmission in URLs',
+      icon: <Globe className="w-4 h-4 text-purple-500" />
     },
     {
       action: 'urlDecode',
       label: 'URL Decode',
-      description: 'Decode URL-encoded text'
+      description: 'Convert URL-encoded strings back to normal text',
+      icon: <Link2 className="w-4 h-4 text-indigo-500" />
+    },
+    {
+      action: 'jwtDecode',
+      label: 'JWT Decoder',
+      description: 'Decode JWT payload and header JSON strings locally',
+      icon: <KeyRound className="w-4 h-4 text-purple-500" />
+    },
+    {
+      action: 'urlParse',
+      label: 'URL Parser',
+      description: 'Break down URL protocol, paths, and query variables',
+      icon: <Compass className="w-4 h-4 text-indigo-500" />
     },
     {
       action: 'sha256',
       label: 'SHA-256 Hash',
-      description: 'Generate SHA-256 hash (one-way)'
+      description: 'Generate secure, one-way SHA-256 hash output',
+      icon: <Fingerprint className="w-4 h-4 text-purple-500" />
     }
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <div>
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-          Encoding & Hashing Tools
+        <h2 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight flex items-center gap-2">
+          <span>Encoding & Hashing Tools</span>
         </h2>
-        <p className="text-gray-600 dark:text-gray-400 text-sm">
-          Encode, decode, and hash text for various purposes
+        <p className="text-slate-500 dark:text-slate-400 text-xs">
+          Encode, decode, and parse tokens, URLs, and hash signatures securely
         </p>
       </div>
 
       {error && (
-        <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-          <p className="text-red-700 dark:text-red-400 text-sm">{error}</p>
+        <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-start space-x-2.5">
+          <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+          <p className="text-red-600 dark:text-red-400 text-xs font-semibold leading-relaxed">{error}</p>
         </div>
       )}
 
@@ -102,34 +147,45 @@ const EncodingTools: React.FC<EncodingToolsProps> = ({ input, onOutput }) => {
           return (
             <div
               key={tool.action}
-              className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+              className="glass-card p-5 rounded-2xl flex flex-col justify-between"
             >
-              <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
-                {tool.label}
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                {tool.description}
-              </p>
+              <div>
+                <div className="flex items-center space-x-2 mb-2">
+                  <div className="p-1.5 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                    {tool.icon}
+                  </div>
+                  <h3 className="font-bold text-slate-800 dark:text-slate-200 text-sm">
+                    {tool.label}
+                  </h3>
+                </div>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+                  {tool.description}
+                </p>
+              </div>
               <ToolButton
                 onClick={() => handleEncoding(tool.action)}
                 disabled={!input.trim() || loading}
                 variant="primary"
-                className="w-full"
+                className="w-full text-xs"
               >
-                {loading && tool.action === 'sha256' ? 'Hashing...' : 'Apply'}
+                {loading && tool.action === 'sha256' ? 'Hashing...' : 'Apply Tool'}
               </ToolButton>
             </div>
           );
         })}
       </div>
 
-      <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
-        <h3 className="font-medium text-amber-900 dark:text-amber-100 mb-2">
-          Security Note
-        </h3>
-        <p className="text-xs text-amber-700 dark:text-amber-300">
-          SHA-256 hashing is one-way and cannot be reversed. Base64 and URL encoding are not encryption methods.
-        </p>
+      {/* Security Info Banner */}
+      <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4 flex items-start space-x-3 shadow-inner">
+        <AlertTriangle className="w-4.5 h-4.5 text-amber-500 shrink-0 mt-0.5" />
+        <div className="space-y-1">
+          <h3 className="font-bold text-amber-800 dark:text-amber-300 text-xs">
+            Security Notice
+          </h3>
+          <p className="text-[11px] text-amber-700/80 dark:text-amber-400/80 leading-normal">
+            All operations are executed locally. Hashing functions and token decoders process inputs purely inside your browser window, ensuring no sensitive parameters or credential keys are leaked.
+          </p>
+        </div>
       </div>
     </div>
   );
